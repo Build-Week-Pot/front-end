@@ -6,7 +6,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 
 
+
+
 const Register = () => {
+
+
+
+
 
     const  {register, handleSubmit, formState: { errors}} = useForm({
         resolver: yupResolver(registerSchema),
@@ -19,11 +25,12 @@ const Register = () => {
 
 return (
         <div className="mt-5" style={{display: 'flex', justifyContent: 'center'}}>
-        <div className="shadow p-5 mb-9 rounded  w-50 mt-1" style={{backgroundColor: '#8ecae6'}}> 
+        <div className="shadow p-5 mb-20 rounded  w-50 mt-1" style={{backgroundColor: '#8ecae6', border:'1px solid black'}}> 
             <h1 className="text-left pb-5" style={{fontWeight: '500'}}>Sign Up</h1>
-            <form className="text-left" onSubmit={handleSubmit(submitForm)}> 
-           
-                <input
+            <form className="text-left" onSubmit={handleSubmit(submitForm)}>
+
+            <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/person.png`} alt="logo"/>
+                <input className="border-1 shadow"
                  type="text"
                  name="name"
                  placeholder="Full Name"
@@ -33,8 +40,8 @@ return (
                  <p style={{color:"red"}}>  {errors.name?.message} </p>
                  <br/>
 
-                 
-                    <input className="border-1 shadow "
+                 <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/email.jpg`} alt="logo"/>
+                    <input className="border-1 shadow"
                      type="email"
                      name="email"
                      placeholder="Email"
@@ -44,7 +51,7 @@ return (
                  <p style={{color:"red"}}>  {errors.email?.message} </p>
                  <br/>
 
-                
+                 <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/username.png`} alt="logo"/>
                      <input className="border-1 shadow"
                      type="text"
                      name="username"
@@ -55,7 +62,7 @@ return (
                  <p style={{color:"red"}}>  {errors.username?.message} </p>
                  <br/>
 
-                 
+                 <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/lock.png`} alt="logo"/>
                      <input className="border-1 shadow"
                      type="password"
                      name="password"
@@ -67,7 +74,7 @@ return (
                      <p style={{color:"red"}}>  {errors.password?.message} </p>
                  <br/>
 
-                
+                 <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/key.jpg`} alt="logo"/>
                      <input className="border-1 shadow"
                       type="password"
                      name="confirm_password"
