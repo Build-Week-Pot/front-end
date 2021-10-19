@@ -2,12 +2,15 @@ import './css/_form.css';
 
 export default function Form() {
 
+
+  
+
     return(
     <form class="form">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputName">Name of Potluck</label>
-          <input type="text" class="form-control" id="inputPassword4" placeholder="Name of Potluck"/>
+          <input type="text" class="form-control" id="inputPassword" placeholder="Name of Potluck"/>
         </div>
       </div>
       <div class="form-group">
@@ -87,7 +90,7 @@ export default function Form() {
       </div>
       <div class="form-group">
         <label for="special_instructions">Special Instructions for Guests</label>
-        <textarea class="form-control" id="special_instructions" rows="3"></textarea>
+        <textarea class="form-control" id="inputInstructions" rows="3"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Sign in</button>
     </form>
