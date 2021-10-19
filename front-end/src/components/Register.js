@@ -76,7 +76,7 @@ const Register = () => {
                      />
                  
                  <br/>
-                 <p>  {errors.confirm_password && "Passwords don't match" } </p>
+                 <p>  {errors.confirm_password && "Passwords do not match" } </p>
                 <input type="submit"/>
             </form>
         </div>
