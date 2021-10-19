@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { registerSchema } from '../Validations/RegisterValidation'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useForm } from 'react-hook-form'
@@ -10,10 +10,23 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 const Register = () => {
 
+    const url = ""
+    const [data, setData] = useState({
+        fullName: "",
+        email: "",
+        username: "",
+        password: "",
 
+})
 
+function handle(e){
+const newData={...data}
+newData[e.target.id] = e.target.defaultValue
+setData(newData)
+console.log(newData)
+}
 
-
+    
     const  {register, handleSubmit, formState: { errors}} = useForm({
         resolver: yupResolver(registerSchema),
     });
@@ -31,8 +44,11 @@ return (
 
             <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/person.png`} alt="logo"/>
                 <input className="border-1 shadow"
+                onChange={(e) =>handle(e)}
+                id="fullName"
+                defaultValue={data.fullName}
                  type="text"
-                 name="name"
+                 name="FullName"
                  placeholder="Full Name"
                  {...register('name')}
                 />
@@ -42,6 +58,9 @@ return (
 
                  <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/email.jpg`} alt="logo"/>
                     <input className="border-1 shadow"
+                    onChange={(e) =>handle(e)}
+                    id="email"
+                    defaultValue={data.email}
                      type="email"
                      name="email"
                      placeholder="Email"
@@ -53,6 +72,9 @@ return (
 
                  <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/username.png`} alt="logo"/>
                      <input className="border-1 shadow"
+                     onChange={(e) =>handle(e)}
+                     id="username"
+                     defaultValue={data.username}
                      type="text"
                      name="username"
                      placeholder="Username"
@@ -64,6 +86,9 @@ return (
 
                  <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/lock.png`} alt="logo"/>
                      <input className="border-1 shadow"
+                     onChange={(e) =>handle(e)}
+                     id="password"
+                     defaultValue={data.password}
                      type="password"
                      name="password"
                      placeholder="Password"
@@ -84,12 +109,21 @@ return (
                  
                  <br/>
                  <p style={{color:"red"}}>  {errors.confirm_password && "Passwords do not match" } </p>
+                
                 <input type="submit"
-                className="shadow p-1 mb-5 bg-black rounded mt-4 m-4"
-                style={{width: '14%', height: '4vh', backgroundColor: 'black', color: 'white', borderRadius: '7%' }}/>
+                className="shadow p-1 mb-5 bg-black rounded mt-4 m-4 m-5"
+                style={{width: '14%', height: '5vh', backgroundColor: 'black', color: 'white', borderRadius: '7%' }}/><br/>
+           
+        <img style={{color: 'black', width: '3.8%', marginRight: '3px', paddingRight:'2px', paddingBottom:'4px', marginRight: '40px'}} src={`${process.env.PUBLIC_URL}/assets/fb.png`} alt="logo"/>
+        <img style={{color: 'black', width: '3.4%', marginRight: '3px', paddingRight:'2px', paddingBottom:'4px', marginRight: '40px'}} src={`${process.env.PUBLIC_URL}/assets/google.png`} alt="logo"/>
+        <img style={{color: 'black', width: '3.7%', marginRight: '3px', paddingRight:'2px', paddingBottom:'4px', marginRight: '40px'}} src={`${process.env.PUBLIC_URL}/assets/twitter.png`} alt="logo"/>
+        <img style={{color: 'black', width: '3.7%', marginRight: '1px', paddingRight:'4px', paddingBottom:'4px', marginRight: '40px'}} src={`${process.env.PUBLIC_URL}/assets/github.png`} alt="logo"/>
+      
+        
             </form>
         </div>
         </div>
+
     )
 }
 
