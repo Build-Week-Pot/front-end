@@ -21,6 +21,9 @@ export default function Header(){
                     <li class="nav-item">
                         <Link to="/create"class="nav-link" >Create Potluck</Link>
                     </li>
+                    <li class="nav-item">
+                        <Link to="/userdash"class="nav-link" >User Dashboard</Link>
+                    </li>
                 </ul>
             </div>
         </nav>

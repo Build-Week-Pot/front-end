@@ -6,7 +6,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Form from './components/Form';
-
+import UserDash from './components/UserDash'
 
 
 
@@ -16,6 +16,9 @@ function App() {
       <Header  />
       {
             <Switch>
+               <Route path="/userdash">
+                    <UserDash />
+                </Route>
                 <Route path="/create">
                     <Form />
                 </Route>
