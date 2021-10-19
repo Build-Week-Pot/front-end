@@ -7,10 +7,15 @@ import * as yup from 'yup'
 
 function App() {
   return (
+<<<<<<< HEAD
     <div>
       <Register />
       {/* <Login /> */}
   
+=======
+    <div className="App">
+      <h1>hello</h1>
+>>>>>>> main
     </div>
   );
 }
