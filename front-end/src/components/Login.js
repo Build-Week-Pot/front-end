@@ -1,20 +1,13 @@
 import React from 'react'
 import { loginSchema } from '../Validations/LoginValidation'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Login = () => {
 
-    const userLogin = async  (event) => {
-        event.preventDefault()
-        let dataLogin = {
-            user:  event.target[0].value ,
-            pass:  event.target[1].value,
-        };
-      const validate = await loginSchema.isValid(dataLogin);
-      console.log(validate)
-    }
+
 
 return (
-       <form onSubmit={userLogin}>
+       <form>
            <h1>Login</h1>
            <label>Username:
                <input type="text"

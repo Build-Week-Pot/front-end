@@ -1,59 +1,82 @@
 import React from 'react'
 import { registerSchema } from '../Validations/RegisterValidation'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 
 const Register = () => {
 
-    const userCreate = async  (event) => {
-    event.preventDefault()
-    let data = {
-        name: event.target[0].value ,
-        email:  event.target[1].value ,
-        username:  event.target[2].value ,
-        password:  event.target[3].value,
-    };
-  const validate = await registerSchema.isValid(data);
-  console.log(validate)
-}
+    const  {register, handleSubmit, formState: { errors}} = useForm({
+        resolver: yupResolver(registerSchema),
+    });
+
+    const submitForm = (data) => {
+        console.log(data)
+
+    }
 
 
 
  return (
         <div>
             <h1>Register</h1>
-            <form onSubmit={userCreate}> 
-             <label>Full Name: 
+            <form onSubmit={handleSubmit(submitForm)}> 
+           
                 <input
                  type="text"
                  name="name"
                  placeholder="Full Name"
+                 {...register('name')}
                 />
-                 </label>
+                
+                 <p>  {errors.name?.message} </p>
                  <br/>
 
-                 <label>Email:
+                 
                     <input
                      type="email"
                      name="email"
                      placeholder="Email"
+                     {...register('email')}
                      />
-                 </label>
+               
+                 <p>  {errors.email?.message} </p>
                  <br/>
 
-                 <label>Username:
+                
                      <input
                      type="text"
                      name="username"
-                     placeholder="Username"/>
-                 </label>
+                     placeholder="Username"
+                     {...register('username')}
+                     />
+               
+                 <p>  {errors.username?.message} </p>
                  <br/>
 
-                 <label>Password:
+                 
                      <input
                      type="password"
                      name="password"
-                     placeholder="Password"/>
-                 </label>
+                     placeholder="Password"
+                    
+                     {...register('password')}
+                     />
+                   
+                     <p>  {errors.password?.message} </p>
+                 <br/>
+
+                
+                     <input type="password"
+                     name="confirm_password"
+                     placeholder='Confirm Password'
+                     {...register('confirm_password')}
+                     />
+                 
+                 <br/>
+                 <p>  {errors.confirm_password && "Passwords don't match" } </p>
                 <input type="submit"/>
             </form>
         </div>
