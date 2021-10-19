@@ -3,7 +3,7 @@ import { registerSchema } from '../Validations/RegisterValidation'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+
 
 
 const Register = () => {
@@ -13,16 +13,15 @@ const Register = () => {
     });
 
     const submitForm = (data) => {
-        console.log(data)
-
+       
+   // All data information typed in boxes are pushed to 'data'
     }
 
-
-
- return (
-        <div>
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit(submitForm)}> 
+return (
+        <div className="mt-5" style={{display: 'flex', justifyContent: 'center'}}>
+        <div className="shadow p-5 mb-9 rounded  w-50 mt-1" style={{backgroundColor: '#8ecae6'}}> 
+            <h1 className="text-left pb-5" style={{fontWeight: '500'}}>Sign Up</h1>
+            <form className="text-left" onSubmit={handleSubmit(submitForm)}> 
            
                 <input
                  type="text"
@@ -31,33 +30,33 @@ const Register = () => {
                  {...register('name')}
                 />
                 
-                 <p>  {errors.name?.message} </p>
+                 <p style={{color:"red"}}>  {errors.name?.message} </p>
                  <br/>
 
                  
-                    <input
+                    <input className="border-1 shadow "
                      type="email"
                      name="email"
                      placeholder="Email"
                      {...register('email')}
                      />
                
-                 <p>  {errors.email?.message} </p>
+                 <p style={{color:"red"}}>  {errors.email?.message} </p>
                  <br/>
 
                 
-                     <input
+                     <input className="border-1 shadow"
                      type="text"
                      name="username"
                      placeholder="Username"
                      {...register('username')}
                      />
                
-                 <p>  {errors.username?.message} </p>
+                 <p style={{color:"red"}}>  {errors.username?.message} </p>
                  <br/>
 
                  
-                     <input
+                     <input className="border-1 shadow"
                      type="password"
                      name="password"
                      placeholder="Password"
@@ -65,20 +64,24 @@ const Register = () => {
                      {...register('password')}
                      />
                    
-                     <p>  {errors.password?.message} </p>
+                     <p style={{color:"red"}}>  {errors.password?.message} </p>
                  <br/>
 
                 
-                     <input type="password"
+                     <input className="border-1 shadow"
+                      type="password"
                      name="confirm_password"
                      placeholder='Confirm Password'
                      {...register('confirm_password')}
                      />
                  
                  <br/>
-                 <p>  {errors.confirm_password && "Passwords do not match" } </p>
-                <input type="submit"/>
+                 <p style={{color:"red"}}>  {errors.confirm_password && "Passwords do not match" } </p>
+                <input type="submit"
+                className="shadow p-1 mb-5 bg-black rounded mt-4 m-4"
+                style={{width: '14%', height: '4vh', backgroundColor: 'black', color: 'white', borderRadius: '7%' }}/>
             </form>
+        </div>
         </div>
     )
 }
