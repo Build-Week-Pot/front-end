@@ -1,8 +1,7 @@
 import './App.css';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Home from './components/Home';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Form from './components/Form';
@@ -33,7 +32,6 @@ function App() {
                 </Route>
             </Switch>
         }
-      <Footer />
     </div>
 
     
