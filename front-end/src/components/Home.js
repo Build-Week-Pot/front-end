@@ -6,7 +6,7 @@ export default function Home(){
 
     return(
     <section className="home-container">
-       Homepage
+       Homepage/User Dashboard
     </section>
     )
 }
