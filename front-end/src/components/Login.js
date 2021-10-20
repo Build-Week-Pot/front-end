@@ -1,39 +1,38 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+
+const initialValues = { username: '', password: ''};
+
 
 const Login = () => {
 
-const [log, setLog] = useState({
-    username:"",
-    password:""
-})
+    const [ error, setError ] = useState('');
+    const [ formValues, setFormValues ] = useState(initialValues);
+    const { push } = useHistory()
 
-const handle = (event) => {
-    const newData = { ...log }
-    newData[event.target.id] = event.target.value
-    setLog(newData)
-    console.log(newData)
-}
+    const handleChanges = (e) => {
+        setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    }
 
-const submitForm = ()=> {
-    axios.post("https://potluckplanner7.herokuapp.com/api/user/login", {
-        username: log.username,
-        password: log.password,
-    }).then(res => {
-        console.log(res.data)
-    })
-}
-
-
-
-  
-
+    const handleSubmit = e => {
+        e.preventDefault();
+        axios.post('https://potluckplanner7.herokuapp.com/api/user/login', formValues)
+            .then(res=> {
+                window.localStorage.setItem('token', res.data.token);
+                push('/view');
+            })
+            .catch(err => {
+                console.log(err);
+                setError('User name or password is incorrect');
+            })
+    }
 
 return (
     <div className="mt-5" style={{display: 'flex', justifyContent: 'center'}}>
         <div className="shadow p-5 mb-20 rounded  w-50 mt-1" style={{backgroundColor: '#8ecae6', border:'1px solid black'}}> 
-       <form className="text-center" onSubmit={submitForm}>
+       <form className="text-center" onSubmit={handleSubmit}>
            <h1>Login</h1>
 
            <img style={{color: 'black', width: '3.4%',paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/person.png`} alt="logo"/>
@@ -41,8 +40,8 @@ return (
                name="username"
                placeholder="Username"
                id="username"
-               onChange={(event) =>handle(event)}
-            //    {...register('user')}
+               onChange={handleChanges}
+               value={formValues.username}
                />
             <br/>
                <p style={{color:"red"}}> </p>
@@ -52,8 +51,8 @@ return (
                    name="password"
                    placeholder="Password"
                    id="password"
-                   onChange={(event) =>handle(event)}
-                //    {...register('pass')}
+                   onChange={handleChanges}
+                   value={formValues.password}
                    />
           <br/>
                    <p style={{color:"red"}}></p>
