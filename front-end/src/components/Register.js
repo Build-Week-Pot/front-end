@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import { registerSchema } from '../Validations/RegisterValidation'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -13,24 +12,45 @@ import axios from 'axios'
 
 const Register = () => {
 
-    const url =""
-    const [data, setData] = useState({
+
+    const [regis, setRegis] = useState({
         fullName: "",
         email: "",
         username: "",
         password: "",
+        role: "guest"
 
     })
 
-    const submitForm = (data) => {
- 
+
+const handle = (event) => {
+    const newData = { ...regis }
+    newData[event.target.id] = event.target.value
+    setRegis(newData)
+  
+    
+}
+
+
+
+    const submitForm = newPerson => {
+        axios.post("https://potluckplanner7.herokuapp.com/api/user/register", {
+            fullName: regis.fullName,
+            email: regis.email,
+            username: regis.username,
+            password: regis.password,
+            role: regis.role
+        }).then(res => {
+            console.log(res.data)
+        })
+      
      
    // All data information typed in boxes are pushed to 'data'
     }
 
     
     const  {register, handleSubmit, formState: { errors}} = useForm({
-        resolver: yupResolver(registerSchema),
+        // resolver: yupResolver(registerSchema),
     });
 
 
@@ -48,6 +68,8 @@ return (
                  type="text"
                  name="fullName"
                  placeholder="Full Name"
+                 value={regis.fullName}
+                 onChange={(event) =>handle(event)}
                 //  {...register('name')}
                 />
                 
@@ -61,6 +83,8 @@ return (
                     type="email"
                      name="email"
                      placeholder="Email"
+                     value={regis.email}
+                     onChange={(event) =>handle(event)}
                     //  {...register('email')}
                      />
                
@@ -74,7 +98,10 @@ return (
                      type="text"
                      name="username"
                      placeholder="Username"
-                     {...register('username')}
+                     value={regis.username}
+                     onChange={(event) =>handle(event)}
+                    //  {...register('username')}
+
                      />
                
                  <p style={{color:"red"}}>  {errors.username?.message} </p>
@@ -87,6 +114,8 @@ return (
                      type="password"
                      name="password"
                      placeholder="Password"
+                     value={regis.password}
+                     onChange={(event) =>handle(event)}
                     
                     //  {...register('password')}
                      />
@@ -99,7 +128,8 @@ return (
                       type="password"
                      name="confirm_password"
                      placeholder='Confirm Password'
-                     {...register('confirm_password')}
+                     
+                    //  {...register('confirm_password')}
                      />
                  
                  <br/>
@@ -107,14 +137,20 @@ return (
                 
                 <label className="p-3">Organizer
                 <input className="m-2"
+                id="organizer"
                 type="radio"
                 name="role"
+                value={regis.role === 'organizer' }
+                // onChange={(event) =>handle(event)}
                 />
                 </label>
                 <label className="p-3">Guest
                 <input className="m-2"
+                id="guest"
                 type="radio"
                 name="role"
+                value={regis.role === 'guest'}
+                // onChange={(event) =>handle(event)}
                 />
                 </label>
                 <br/>
