@@ -48,7 +48,7 @@ return (
                  type="text"
                  name="fullName"
                  placeholder="Full Name"
-                 {...register('name')}
+                //  {...register('name')}
                 />
                 
                  <p style={{color:"red"}}>  {errors.name?.message} </p>
@@ -61,7 +61,7 @@ return (
                     type="email"
                      name="email"
                      placeholder="Email"
-                     {...register('email')}
+                    //  {...register('email')}
                      />
                
                  <p style={{color:"red"}}>  {errors.email?.message} </p>
@@ -88,7 +88,7 @@ return (
                      name="password"
                      placeholder="Password"
                     
-                     {...register('password')}
+                    //  {...register('password')}
                      />
                    
                      <p style={{color:"red"}}>  {errors.password?.message} </p>
