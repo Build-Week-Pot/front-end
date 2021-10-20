@@ -1,61 +1,45 @@
 import React, {useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
-
-
-
-
+const initialValues = { 
+    fullName: '',
+    email: '',
+    username: '', 
+    password: '',
+    role: ''
+}
 
 
 const Register = () => {
 
+    const [ error, setError ] = useState('');
+    const [ formValues, setFormValues ] = useState(initialValues);
+    const { push } = useHistory()
 
-    const [regis, setRegis] = useState({
-        fullName: "",
-        email: "",
-        username: "",
-        password: "",
-        role: "guest"
-
-    })
-
-
-const handle = (event) => {
-    const newData = { ...regis }
-    newData[event.target.id] = event.target.value
-    setRegis(newData)
-  
-    
-}
-
-
-
-    const submitForm = () => {
-        axios.post("https://potluckplanner7.herokuapp.com/api/user/register", {
-            fullName: regis.fullName,
-            email: regis.email,
-            username: regis.username,
-            password: regis.password,
-            role: regis.role
-        }).then(res => {
-            console.log(res.data)
-        })
-      
-     
-   // All data information typed in boxes are pushed to 'data'
+    const handleChanges = (e) => {
+        setFormValues({ ...formValues, [e.target.name]: e.target.value });
     }
 
-    
-
-
+    const handleSubmit = e => {
+        e.preventDefault();
+        axios.post('https://potluckplanner7.herokuapp.com/api/user/register', formValues)
+            .then(res=> {
+                push('/view');
+            })
+            .catch(err => {
+                console.log(err);
+                setError('Username or password is incorrect');
+            })
+    }
 
 
 return (
         <div className="mt-5" style={{display: 'flex', justifyContent: 'center'}}>
         <div className="shadow p-5 mb-20 rounded  w-50 mt-1" style={{backgroundColor: '#8ecae6', border:'1px solid black'}}> 
             <h1 className="text-left pb-5" style={{fontWeight: '500'}}>Sign Up</h1>
-            <form className="text-left" onSubmit={submitForm}>
+            <form className="text-left" onSubmit={handleSubmit}>
 
             <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/person.png`} alt="logo"/>
                 <input className="border-1 shadow"
@@ -64,9 +48,8 @@ return (
                  type="text"
                  name="fullName"
                  placeholder="Full Name"
-                 value={regis.fullName}
-                 onChange={(event) =>handle(event)}
-                //  {...register('name')}
+                 value={formValues.fullName}
+                 onChange={handleChanges}
                 />
                 
                  <p style={{color:"red"}}></p>
@@ -79,9 +62,8 @@ return (
                     type="email"
                      name="email"
                      placeholder="Email"
-                     value={regis.email}
-                     onChange={(event) =>handle(event)}
-                    //  {...register('email')}
+                     value={formValues.email}
+                     onChange={handleChanges}
                      />
                
                  <p style={{color:"red"}}> </p>
@@ -94,12 +76,9 @@ return (
                      type="text"
                      name="username"
                      placeholder="Username"
-                     value={regis.username}
-                     onChange={(event) =>handle(event)}
-                    //  {...register('username')}
-
-                     />
-               
+                     value={formValues.username}
+                     onChange={handleChanges}
+                     />      
                  <p style={{color:"red"}}></p>
                  <br/>
 
@@ -110,10 +89,8 @@ return (
                      type="password"
                      name="password"
                      placeholder="Password"
-                     value={regis.password}
-                     onChange={(event) =>handle(event)}
-                    
-                    //  {...register('password')}
+                    value={formValues.password}
+                     onChange={handleChanges}
                      />
                    
                      <p style={{color:"red"}}> </p>
@@ -124,20 +101,16 @@ return (
                       type="password"
                      name="confirm_password"
                      placeholder='Confirm Password'
-                     
-                    //  {...register('confirm_password')}
-                     />
-                 
+                     />  
                  <br/>
                  <p style={{color:"red"}}> </p>
-                
                 <label className="p-3">Organizer
                 <input className="m-2"
                 id="organizer"
                 type="radio"
                 name="role"
-                value={regis.role === 'organizer' }
-                // onChange={(event) =>handle(event)}
+                value={formValues.role === 'organizer' }
+                onChange={handleChanges}
                 />
                 </label>
                 <label className="p-3">Guest
@@ -145,8 +118,8 @@ return (
                 id="guest"
                 type="radio"
                 name="role"
-                value={regis.role === 'guest'}
-                // onChange={(event) =>handle(event)}
+                value={formValues.role === 'guest'}
+                onChange={handleChanges}
                 />
                 </label>
                 <br/>
@@ -169,6 +142,7 @@ return (
         </div>
 
     )
+    
 }
 
-export default Register
+export default Register;
