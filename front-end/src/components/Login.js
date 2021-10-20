@@ -1,20 +1,42 @@
-import React from 'react'
-import { loginSchema } from '../Validations/LoginValidation'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import axios from 'axios'
 
 const Login = () => {
 
+const [log, setLog] = useState({
+    username:"",
+    password:""
+})
+
+const handle = (event) => {
+    const newData = { ...log }
+    newData[event.target.id] = event.target.value
+    setLog(newData)
+    console.log(newData)
+}
+
+const submitForm = newPerson => {
+    axios.post("https://potluckplanner7.herokuapp.com/api/user/login", {
+        username: log.username,
+        password: log.password,
+    }).then(res => {
+        console.log(res.data)
+    })
+}
+
+
+
+
+
     const  {register, handleSubmit, formState: { errors}} = useForm({
-        resolver: yupResolver(loginSchema),
+        // resolver: yupResolver(loginSchema),
     });
 
-    const submitForm = (data) => {
-        console.log(data)
-
-    }
+  
 
 
 return (
@@ -25,18 +47,22 @@ return (
 
            <img style={{color: 'black', width: '3.4%',paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/person.png`} alt="logo"/>
                <input type="text"
-               name="user"
+               name="username"
                placeholder="Username"
-               {...register('user')}
+               id="username"
+               onChange={(event) =>handle(event)}
+            //    {...register('user')}
                />
             <br/>
                <p style={{color:"red"}}>  {errors.user?.message} </p>
 
                <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/lock.png`} alt="logo"/>
                    <input type="password"
-                   name="pass"
+                   name="password"
                    placeholder="Password"
-                   {...register('pass')}
+                   id="password"
+                   onChange={(event) =>handle(event)}
+                //    {...register('pass')}
                    />
           <br/>
                    <p style={{color:"red"}}>  {errors.pass?.message} </p>
@@ -48,10 +74,10 @@ return (
                    style={{width: '14%', height: '4vh', backgroundColor: 'black', color: 'white', borderRadius: '7%' }}/> <br/>
 
 
-        <img style={{width: '3.8%', paddingRight:'2px', paddingBottom:'4px', marginRight: '20px', marginTop: '30px'}} src={`${process.env.PUBLIC_URL}/assets/fb.png`} alt="logo"/>
-        <img style={{width: '3.4%',paddingRight:'2px', paddingBottom:'4px', marginRight: '20px',  marginTop: '30px'}} src={`${process.env.PUBLIC_URL}/assets/google.png`} alt="logo"/>
-        <img style={{width: '3.7%',paddingRight:'2px', paddingBottom:'4px', marginRight: '20px',  marginTop: '30px'}} src={`${process.env.PUBLIC_URL}/assets/twitter.png`} alt="logo"/>
-        <img style={{width: '3.7%',paddingRight:'5px', paddingBottom:'4px', marginRight: '20px',  marginTop: '30px'}} src={`${process.env.PUBLIC_URL}/assets/github.png`} alt="logo"/>
+        <img style={{width: '3.8%', paddingRight:'2px', paddingBottom:'4px', marginRight: '30px', marginTop: '30px'}} src={`${process.env.PUBLIC_URL}/assets/fb.png`} alt="logo"/>
+        <img style={{width: '3.4%',paddingRight:'2px', paddingBottom:'4px', marginRight: '30px',  marginTop: '30px'}} src={`${process.env.PUBLIC_URL}/assets/google.png`} alt="logo"/>
+        <img style={{width: '3.7%',paddingRight:'2px', paddingBottom:'4px', marginRight: '30px',  marginTop: '30px'}} src={`${process.env.PUBLIC_URL}/assets/twitter.png`} alt="logo"/>
+        <img style={{width: '3.7%',paddingRight:'5px', paddingBottom:'4px', marginRight: '30px',  marginTop: '30px'}} src={`${process.env.PUBLIC_URL}/assets/github.png`} alt="logo"/>
        
        
        
