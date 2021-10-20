@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useForm } from 'react-hook-form'
 import axios from 'axios'
 
 const Login = () => {
@@ -28,19 +27,13 @@ const submitForm = ()=> {
 
 
 
-
-
-    const  { handleSubmit, formState: { errors}} = useForm({
-    
-    });
-
   
 
 
 return (
     <div className="mt-5" style={{display: 'flex', justifyContent: 'center'}}>
         <div className="shadow p-5 mb-20 rounded  w-50 mt-1" style={{backgroundColor: '#8ecae6', border:'1px solid black'}}> 
-       <form className="text-center" onSubmit={handleSubmit(submitForm)}>
+       <form className="text-center" onSubmit={submitForm}>
            <h1>Login</h1>
 
            <img style={{color: 'black', width: '3.4%',paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/person.png`} alt="logo"/>
@@ -52,7 +45,7 @@ return (
             //    {...register('user')}
                />
             <br/>
-               <p style={{color:"red"}}>  {errors.user?.message} </p>
+               <p style={{color:"red"}}> </p>
 
                <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/lock.png`} alt="logo"/>
                    <input type="password"
@@ -63,7 +56,7 @@ return (
                 //    {...register('pass')}
                    />
           <br/>
-                   <p style={{color:"red"}}>  {errors.pass?.message} </p>
+                   <p style={{color:"red"}}></p>
 
                    <a className="text-black" href="null">Forgot Password</a><br/>
 

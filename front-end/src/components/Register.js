@@ -1,6 +1,5 @@
 import React, {useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useForm } from 'react-hook-form'
 import axios from 'axios'
 
 
@@ -32,7 +31,7 @@ const handle = (event) => {
 
 
 
-    const submitForm = newPerson => {
+    const submitForm = () => {
         axios.post("https://potluckplanner7.herokuapp.com/api/user/register", {
             fullName: regis.fullName,
             email: regis.email,
@@ -48,9 +47,7 @@ const handle = (event) => {
     }
 
     
-    const  {register, handleSubmit, formState: { errors}} = useForm({
-        
-    });
+
 
 
 
@@ -58,7 +55,7 @@ return (
         <div className="mt-5" style={{display: 'flex', justifyContent: 'center'}}>
         <div className="shadow p-5 mb-20 rounded  w-50 mt-1" style={{backgroundColor: '#8ecae6', border:'1px solid black'}}> 
             <h1 className="text-left pb-5" style={{fontWeight: '500'}}>Sign Up</h1>
-            <form className="text-left" onSubmit={handleSubmit(submitForm)}>
+            <form className="text-left" onSubmit={submitForm}>
 
             <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/person.png`} alt="logo"/>
                 <input className="border-1 shadow"
@@ -72,7 +69,7 @@ return (
                 //  {...register('name')}
                 />
                 
-                 <p style={{color:"red"}}>  {errors.name?.message} </p>
+                 <p style={{color:"red"}}></p>
                  <br/>
 
                  <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/email.jpg`} alt="logo"/>
@@ -87,7 +84,7 @@ return (
                     //  {...register('email')}
                      />
                
-                 <p style={{color:"red"}}>  {errors.email?.message} </p>
+                 <p style={{color:"red"}}> </p>
                  <br/>
 
                  <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/username.png`} alt="logo"/>
@@ -103,7 +100,7 @@ return (
 
                      />
                
-                 <p style={{color:"red"}}>  {errors.username?.message} </p>
+                 <p style={{color:"red"}}></p>
                  <br/>
 
                  <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/lock.png`} alt="logo"/>
@@ -119,7 +116,7 @@ return (
                     //  {...register('password')}
                      />
                    
-                     <p style={{color:"red"}}>  {errors.password?.message} </p>
+                     <p style={{color:"red"}}> </p>
                  <br/>
 
                  <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/key.jpg`} alt="logo"/>
@@ -132,7 +129,7 @@ return (
                      />
                  
                  <br/>
-                 <p style={{color:"red"}}>  {errors.confirm_password && "Passwords do not match" } </p>
+                 <p style={{color:"red"}}> </p>
                 
                 <label className="p-3">Organizer
                 <input className="m-2"
