@@ -92,7 +92,7 @@ export default function Form() {
         <label for="special_instructions">Special Instructions for Guests</label>
         <textarea class="form-control" id="inputInstructions" rows="3"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Sign in</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     )
 }
