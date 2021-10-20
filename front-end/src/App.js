@@ -8,8 +8,8 @@ import * as yup from 'yup'
 function App() {
   return (
     <div>
-      {/* <Register /> */}
-      <Login />
+      <Register />
+      {/* <Login /> */}
   
     </div>
   );
