@@ -10,17 +10,17 @@ export default function Form() {
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputName">Name of Potluck</label>
-          <input type="text" class="form-control" id="inputPassword" placeholder="Name of Potluck"/>
+          <input type="text" class="form-control" id="formName" placeholder="Name of Potluck"/>
         </div>
       </div>
       <div class="form-group">
         <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"/>
+        <input type="text" class="form-control" id="formAddress" placeholder="1234 Main St"/>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputCity">City</label>
-          <input type="text" class="form-control" id="inputCity"/>
+          <input type="text" class="form-control" id="formCity"/>
         </div>
         <div class="form-group col-md-4">
           <label for="inputState">State</label>
@@ -85,12 +85,63 @@ export default function Form() {
         </div>
       </div>
       <div class="form-group">
+        <label for="inputDate">Date</label>
+        <input type="text" class="form-control" id="inputDate" placeholder="ex. 01-04-22"/>
+      </div>
+      <div class="form-group">
         <label for="inputDate">Time</label>
-        <input type="text" class="form-control" id="inputTime" placeholder="ex. 02:30pm"/>
+        <input type="text" class="form-control" id="inputDate" placeholder="ex. 02:30pm"/>
       </div>
       <div class="form-group">
         <label for="special_instructions">Special Instructions for Guests</label>
         <textarea class="form-control" id="inputInstructions" rows="3"></textarea>
+      </div>
+      Foods Needed:
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Meats
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Bread
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Cheese
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Vegetables
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Chips
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Dips
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+        <label class="form-check-label" for="flexCheckDefault">
+          Desserts
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="inputDate">Other Foods</label>
+        <input type="text" class="form-control" id="inputDate" placeholder="List other foods here"/>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
