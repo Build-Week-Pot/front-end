@@ -1,4 +1,3 @@
-import './App.css';
 import Header from './components/Header';
 import Home from './components/Home';
 import { Route, Switch } from 'react-router-dom';
@@ -6,6 +5,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Form from './components/Form';
 import UserDash from './components/UserDash'
+import * as yup from 'yup';
 
 
 
