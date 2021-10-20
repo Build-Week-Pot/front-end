@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import axios from 'axios'
 
 
@@ -50,7 +49,7 @@ const handle = (event) => {
 
     
     const  {register, handleSubmit, formState: { errors}} = useForm({
-        // resolver: yupResolver(registerSchema),
+        
     });
 
 

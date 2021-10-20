@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 import axios from 'axios'
 
 const Login = () => {
@@ -19,7 +17,7 @@ const handle = (event) => {
     console.log(newData)
 }
 
-const submitForm = newPerson => {
+const submitForm = ()=> {
     axios.post("https://potluckplanner7.herokuapp.com/api/user/login", {
         username: log.username,
         password: log.password,
@@ -32,8 +30,8 @@ const submitForm = newPerson => {
 
 
 
-    const  {register, handleSubmit, formState: { errors}} = useForm({
-        // resolver: yupResolver(loginSchema),
+    const  { handleSubmit, formState: { errors}} = useForm({
+    
     });
 
   
