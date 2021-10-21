@@ -1,7 +1,9 @@
-import React, {useState } from 'react'
+import React, {useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import RegisterValidation from '../Validations/RegisterValidation';
+import * as yup from 'yup'
 
 const initialValues = { 
     fullName: '',
@@ -14,15 +16,50 @@ const initialValues = {
 
 const Register = () => {
 
-    const [ error, setError ] = useState('');
+    const [ error, setError ] = useState('');          // originally was  const [ error, setError ] = useState(');
     const [ formValues, setFormValues ] = useState(initialValues);
+   
+    const [wrong, setWrong ] = useState({ 
+     fullName: '',
+    email: '',
+    username: '', 
+    password: '',
+    confirm_password: '',
+    role: ''}) 
+    
+
+    const [disabled, setDisabled] = useState(true)
     const { push } = useHistory()
 
     const handleChanges = (e) => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = e => {
+
+const setFormErrors = (name, value) => {
+    yup.reach(RegisterValidation,name).validate(value)
+    .then(() => setWrong({ ...wrong, [name]: '' }))
+    .catch(err =>setWrong({ ...wrong , [name]: err.errors[0] }))
+}
+
+
+
+
+    const change = event => {
+        const { checked, value, name, type } = event.target
+        const valueToUse = type === 'checkbox' ? checked : value
+        setFormErrors(name, valueToUse)
+        setFormValues({...formValues, [name]: valueToUse});
+    }
+
+
+    useEffect(() => {
+        RegisterValidation.isValid(formValues).then(valid => setDisabled(!valid) )
+    }, [formValues])
+
+
+    
+     const handleSubmit = e => {
         e.preventDefault();
         axios.post('https://potluckplanner7.herokuapp.com/api/user/register', formValues)
             .then(res=> {
@@ -32,7 +69,18 @@ const Register = () => {
                 console.log(err);
                 setError('Username or password is incorrect');
             })
+            
     }
+
+
+
+    const errorSubmit = (e) => {
+       change(e)
+       handleChanges(e)
+       
+
+    }
+
 
 
 return (
@@ -49,8 +97,12 @@ return (
                  name="fullName"
                  placeholder="Full Name"
                  value={formValues.fullName}
-                 onChange={handleChanges}
-                />
+                 onChange={errorSubmit}
+                 />
+                 <div className="text-danger ml-4">
+                     <div>{wrong.fullName}</div>
+                     </div>
+
                 
                  <p style={{color:"red"}}></p>
                  <br/>
@@ -63,8 +115,11 @@ return (
                      name="email"
                      placeholder="Email"
                      value={formValues.email}
-                     onChange={handleChanges}
+                     onChange={errorSubmit}
                      />
+                      <div className="text-danger ml-4">
+                     <div>{wrong.email}</div>
+                     </div>
                
                  <p style={{color:"red"}}> </p>
                  <br/>
@@ -77,10 +132,16 @@ return (
                      name="username"
                      placeholder="Username"
                      value={formValues.username}
-                     onChange={handleChanges}
+                     onChange={errorSubmit}
                      />      
+
+                    <div className="text-danger ml-4">
+                     <div>{wrong.username}</div>
+                     </div>
+
                  <p style={{color:"red"}}></p>
                  <br/>
+                
 
                  <img style={{color: 'black', width: '3.4%', marginRight: '5px', paddingRight:'2px', paddingBottom:'4px'}} src={`${process.env.PUBLIC_URL}/assets/lock.png`} alt="logo"/>
                      <input className="border-1 shadow"
@@ -90,8 +151,11 @@ return (
                      name="password"
                      placeholder="Password"
                     value={formValues.password}
-                     onChange={handleChanges}
+                     onChange={errorSubmit}
                      />
+                      <div className="text-danger ml-4">
+                     <div>{wrong.password}</div>
+                     </div>
                    
                      <p style={{color:"red"}}> </p>
                  <br/>
@@ -101,7 +165,12 @@ return (
                       type="password"
                      name="confirm_password"
                      placeholder='Confirm Password'
+                     onChange={errorSubmit}
+
                      />  
+                      <div className="text-danger ml-4">
+                     <div>{wrong.confirm_password}</div>
+                     </div>
                  <br/>
                  <p style={{color:"red"}}> </p>
                 <label className="p-3">Organizer
@@ -109,8 +178,9 @@ return (
                 id="organizer"
                 type="radio"
                 name="role"
-                value={formValues.role === 'organizer' }
-                onChange={handleChanges}
+                value='organizer' 
+                checked={formValues.role === 'organizer'}
+                onChange={errorSubmit}
                 />
                 </label>
                 <label className="p-3">Guest
@@ -118,9 +188,14 @@ return (
                 id="guest"
                 type="radio"
                 name="role"
-                value={formValues.role === 'guest'}
-                onChange={handleChanges}
+                value='guest'
+                checked={formValues.role === 'guest'}
+                onChange={errorSubmit}
                 />
+                <div className="text-danger ml-4">
+                     <div>{wrong.role && "a role must be selected"}</div>
+                     </div>
+                
                 </label>
                 <br/>
 
@@ -128,8 +203,9 @@ return (
 
 
                 <input type="submit"
+                disabled={disabled}
                 className="shadow p-1 mb-5 bg-black rounded mt-4 m-4 m-5"
-                style={{width: '14%', height: '5vh', backgroundColor: 'black', color: 'white', borderRadius: '7%' }}/><br/>
+                style={{width: '14%', height: '5vh', backgroundColor: 'black', color: 'white', borderRadius: '7%'}}/><br/>
            
         <img style={{color: 'black', width: '3.8%', marginRight: '3px', paddingRight:'2px', paddingBottom:'4px', marginRight: '40px'}} src={`${process.env.PUBLIC_URL}/assets/fb.png`} alt="logo"/>
         <img style={{color: 'black', width: '3.4%', marginRight: '3px', paddingRight:'2px', paddingBottom:'4px', marginRight: '40px'}} src={`${process.env.PUBLIC_URL}/assets/google.png`} alt="logo"/>
