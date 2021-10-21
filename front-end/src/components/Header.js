@@ -24,6 +24,10 @@ export default function Header(){
                     <li class="nav-item">
                         <Link to="/userdash"class="nav-link" >User Dashboard</Link>
                     </li>
+                    <li class="nav-item">
+                        <Link to="/logout"class="nav-link" >Logout</Link>
+                    </li>
+                    
                 </ul>
             </div>
         </nav>

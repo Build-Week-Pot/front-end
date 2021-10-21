@@ -5,7 +5,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Form from './components/Form';
 import UserDash from './components/UserDash'
-
+import Logout from './components/Logout'
 
 
 
@@ -23,6 +23,9 @@ function App() {
                 </Route>
                 <Route path='/login'>
                     <Login />
+                </Route>
+                <Route path='/logout'>
+                    <Logout />
                 </Route>
                 <Route path='/register'>
                     <Register />
