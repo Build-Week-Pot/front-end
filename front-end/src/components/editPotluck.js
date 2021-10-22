@@ -12,7 +12,7 @@ const initialPotluck = {
 
 const EditForm = (props)=> {
   const [potluck, setPotluck] = useState(initialPotluck);
-  const {handleEdit, handleEditCancel, editID} = props;
+  const {handleEdit, handleEditCancel, user_id} = props;
 
   const handleChange = (e)=> {
     setPotluck({
@@ -20,8 +20,13 @@ const EditForm = (props)=> {
       [e.target.name]: e.target.value
     })
   }
+  
   useEffect(() => {
-    axiosWithAuth().get(``)
+    
+  })
+
+  useEffect(() => {
+    axiosWithAuth().get(`https://potluckplanner7.herokuapp.com/api/potluckdashboard/${user_id}`)
     .then(resp => {
       setPotluck(resp.data)
     })
